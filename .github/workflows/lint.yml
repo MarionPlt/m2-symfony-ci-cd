@@ -10,4 +10,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - run: make php-lint HOST_PROJECT_PATH=$(pwd)
+      - name: setup HOST_PROJECT_PATH variable
+        run: echo "HOST_PROJECT_PATH=$(echo $(pwd))" >> $GITHUB_ENV
+      - name: install php dependencies
+        run: docker run -rm --volume $(HOST_PROJECT_PATH)/app:/app composer install
+      - run: make php-lint HOST_PROJECT_PATH=$HOST_PROJECT_PATH
