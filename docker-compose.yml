@@ -1,0 +1,60 @@
+services:
+  mariadb:
+    image: mariadb:11.1.2
+    volumes:
+      - mariadb:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+
+  symfony-php:
+    build:
+      context: ./
+      dockerfile: php-fpm.dockerfile
+    develop:
+      watch:
+        - action: sync
+          path: ./app
+          target: /var/www/app
+        - action: sync+restart
+          path: ./infra/dev/symfony-php/project.ini
+          target: /usr/local/etc/php/conf.d/project.ini
+    environment:
+      APP_ENV: dev
+    depends_on:
+      - mariadb
+    tty: true
+
+  symfony-nginx:
+    build:
+      context: ./
+      dockerfile: nginx.dockerfile
+    develop:
+      watch:
+        - action: sync
+          path: ./app
+          target: /var/www/app
+        - action: sync+restart
+          path: ./infra/dev/symfony-nginx/virtualhost.conf
+          target: /etc/nginx/conf.d/default.conf
+        - action: sync+restart
+          path: ./infra/dev/symfony-nginx/default.conf
+          target: /etc/nginx/default.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - symfony-php
+    tty: true
+
+  mailer:
+    image: axllent/mailpit
+    ports:
+      - "1025"
+      - "8025"
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+
+volumes:
+  mariadb:
