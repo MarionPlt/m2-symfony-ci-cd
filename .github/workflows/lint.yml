@@ -10,5 +10,5 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - run: export HOST_PROJECT_PATH=$(pwd)
+      - run: export HOST_PROJECT_PATH=${{ github.workspace }}
       - run: make php-lint
