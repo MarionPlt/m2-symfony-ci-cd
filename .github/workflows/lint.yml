@@ -10,5 +10,4 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - run: export HOST_PROJECT_PATH=./
-      - run: make php-lint
+      - run: make php-lint HOST_PROJECT_PATH=$(pwd)
