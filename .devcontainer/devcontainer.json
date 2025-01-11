@@ -1,5 +1,5 @@
 {
-  "name": "My docker images",
+  "name": "M2 Symfony CI/CD",
   "dockerFile": "./Dockerfile",
   "mounts": [
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind,consistency=cached"
