@@ -8,5 +8,8 @@
   "workspaceFolder": "/workspace",
   "remoteEnv": {
     "HOST_PROJECT_PATH": "${localWorkspaceFolder}"
-  }
+  },
+  "containerUser": "root",
+  "postCreateCommand": "chown app:app /var/run/docker.sock",
+  "remoteUser": "app"
 }
