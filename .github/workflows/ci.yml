@@ -6,7 +6,7 @@ on:
       - reopened
       - synchronize
 jobs:
-  lint:
+  ci:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -15,11 +15,5 @@ jobs:
       - name: install php dependencies
         run: docker run --rm --volume $HOST_PROJECT_PATH/app:/app composer install
       - run: make php-lint HOST_PROJECT_PATH=$HOST_PROJECT_PATH
-  build:
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v4
-      - name: install php dependencies
-        run: docker run --rm --volume $HOST_PROJECT_PATH/app:/app composer install
       - name: Début des images
         run: docker compose build
