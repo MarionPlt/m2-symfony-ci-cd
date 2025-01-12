@@ -12,9 +12,11 @@ jobs:
       - uses: actions/checkout@v4
       - name: Setup HOST_PROJECT_PATH variable
         run: echo "HOST_PROJECT_PATH=$(echo $(pwd))" >> $GITHUB_ENV
-      - name: Build images
-        run: docker compose -f docker-compose.prod.yml build
+      - name: Install php dependencies
+        run: docker run --rm --volume $HOST_PROJECT_PATH/app:/app composer install
       - name: PHP Linter
         run: make php-lint HOST_PROJECT_PATH=$HOST_PROJECT_PATH
       - name: PHP Testing
-        run: docker run --rm --volume $HOST_PROJECT_PATH/app:/app -w /app php:8.3-fpm php bin/console
+        run: docker run --rm --volume $HOST_PROJECT_PATH/app:/app -w /app php:8.3-fpm php bin/phpunit
+      - name: Build images
+        run: docker compose build
