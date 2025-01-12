@@ -27,7 +27,7 @@ WORKDIR /var/www/app
 COPY --chown=app:app ./app /var/www/app
 RUN mkdir vendor cache && \
     chown app:app /var/www/app/vendor && \
-    chown app:app /var/www/app/cache && \
+    chown app:app /var/www/app/cache
 
 USER app
 
