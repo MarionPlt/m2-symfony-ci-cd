@@ -18,12 +18,12 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          file: $HOST_PROJECT_PATH/php-fpm.prod.dockerfile
+          file: php-fpm.prod.dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/m2-ci-cd-symfony:latest
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          file: $HOST_PROJECT_PATH/nginx.prod.dockerfile
+          file: nginx.prod.dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/m2-ci-cd-nginx:latest
