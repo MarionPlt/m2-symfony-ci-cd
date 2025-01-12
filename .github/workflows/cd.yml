@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - fix/cd
 jobs:
   cd:
     runs-on: ubuntu-22.04
