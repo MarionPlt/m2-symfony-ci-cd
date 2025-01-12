@@ -4,7 +4,10 @@ FROM php:8.3-fpm AS build
 RUN useradd -ms /bin/sh -u 1000 app
 
 ## Installation des utilitaires
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y curl=7.88.1-10+deb12u8 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 # RUN apt-get vim nano git zip wkhtmltopdf # Ajouté les paquets nécéssaires
 
 ## Config Timezone
@@ -39,7 +42,10 @@ FROM php:8.3-fpm AS final
 RUN useradd -ms /bin/sh -u 1000 app
 
 ## Installation des utilitaires
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y curl=7.88.1-10+deb12u8 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 # RUN apt-get vim nano git zip wkhtmltopdf # Ajouté les paquets nécéssaires
 
 ## Config Timezone

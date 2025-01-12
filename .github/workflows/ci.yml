@@ -13,12 +13,18 @@ jobs:
       - name: Setup HOST_PROJECT_PATH variable
         run: echo "HOST_PROJECT_PATH=$(echo $(pwd))" >> $GITHUB_ENV
       - name: Install php dependencies
-        run: docker run --rm --volume $HOST_PROJECT_PATH/app:/app composer install
+        run: make install-dependencies
       - name: PHP Linter
-        run: make php-lint HOST_PROJECT_PATH=$HOST_PROJECT_PATH
+        run: make lint
       - name: PHP Testing
-        run: docker run --rm --volume $HOST_PROJECT_PATH/app:/app -w /app php:8.3-fpm php bin/phpunit
+        run: make tests
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: php-fpm.prod.dockerfile
       - name: Build image Symfony
-        run: docker image build -t m2-ci-cd-symfony -f php-fpm.prod.dockerfile .
+        run: make build-symfony
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: php-fpm.prod.dockerfile
       - name: Build image Nginx
-        run: docker image build -t m2-ci-cd-nginx -f nginx.prod.dockerfile .
+        run: make build-nginx
