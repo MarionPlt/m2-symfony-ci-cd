@@ -18,5 +18,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
+      - name: install php dependencies
+        run: docker run --rm --volume $HOST_PROJECT_PATH/app:/app composer install
       - name: Début des images
         run: docker compose build
