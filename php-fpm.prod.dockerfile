@@ -25,6 +25,8 @@ WORKDIR /var/www/app
 
 # Copy source files into application directory
 COPY --chown=app:app ./app /var/www/app
+RUN mkdir vendor && \
+    chown app:app /var/www/app/vendor
 
 USER app
 
