@@ -5,6 +5,10 @@ on:
       - main
     tags:
       - "**"
+
+permissions:
+  contents: write
+
 jobs:
   cd:
     runs-on: ubuntu-22.04
