@@ -34,4 +34,4 @@ jobs:
         with:
           file: nginx.prod.dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/m2-ci-cd-nginx:$IMAGE_TAG
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/m2-ci-cd-nginx:${{ IMAGE_TAG }}
