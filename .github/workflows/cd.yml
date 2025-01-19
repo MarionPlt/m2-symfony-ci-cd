@@ -34,7 +34,7 @@ jobs:
         with:
           file: php-fpm.prod.dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/m2-ci-cd-symfony:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/m2-ci-cd-symfony:${{ env.IMAGE_TAG }}
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
