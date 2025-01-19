@@ -18,13 +18,15 @@ jobs:
         run: make lint
       - name: PHP Testing
         run: make tests
-      - uses: hadolint/hadolint-action@v3.1.0
+      - name: Vérification de la qualité du Dockerfile de Symfony
+        uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: php-fpm.prod.dockerfile
       - name: Build image Symfony
         run: make build-symfony
-      - uses: hadolint/hadolint-action@v3.1.0
+      - name: Vérification de la qualité du Dockerfile de Nginx
+        uses: hadolint/hadolint-action@v3.1.0
         with:
-          dockerfile: php-fpm.prod.dockerfile
+          dockerfile: nginx.prod.dockerfile
       - name: Build image Nginx
         run: make build-nginx
