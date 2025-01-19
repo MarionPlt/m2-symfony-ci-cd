@@ -8,8 +8,8 @@ COPY ./infra/dev/symfony-nginx/default.conf /etc/nginx/default.conf
 
 WORKDIR /var/www/app
 
-RUN chown -R app:app /var/cache/nginx
-RUN chown -R app:app /var/log/nginx
-RUN mkdir -p "/var/run" && touch /var/run/nginx.pid && chown -R app:app /var/run/nginx.pid
+RUN chown -R app:app /var/cache/nginx && \
+    chown -R app:app /var/log/nginx && \
+    mkdir -p "/var/run" && touch /var/run/nginx.pid && chown -R app:app /var/run/nginx.pid
 
 USER app

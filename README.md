@@ -42,11 +42,36 @@ qui n'est pas celui ayant fait le commit et bloque le tag "--force" sur les push
 
 Pour la CI, nous faisons les étapes dans l'ordre suivant :
 1. Récupération des sources du projet
-2. Mise en place d'une variable permettant le bon fonctionnement de notre makefile (que ce soit en devcontainer ou sur la machine hôte)
+2. Mise en place d'une variable permettant le bon fonctionnement de notre makefile (pas besoin en local)
 3. Utilisation du `makefile` pour installer les dépendances de notre projet via composer
+    ```bash
+    make install-dependencies 
+    ```
 4. Utilisation du `makefile` pour le linter `php` grâce à l'outil `phpstan`
+    ```bash
+   make lint
+    ```
 5. Utilisation du `makefile` pour le lancement des tests avec `phpunit`
-6. Vérification via `hadolint/hadolint-action@v3.1.0` du `Dockerfile` utilisé pour la construction de notre image `php`
+    ```bash
+   make tests
+   ```
+6. Vérification via `hadolint/hadolint-action@v3.1.0` du `Dockerfile` utilisé pour la construction de notre image `php`. 
+
+    En local nous pouvons, reproduire le comportement de cette `Github Action` en lançant la commande suivante :
+    ```bash
+   docker run --rm -i  ghcr.io/hadolint/hadolint < php-fpm.prod.dockerfile
+    ```
 7. Utilisation du `makefile` pour le build de notre image `php`
-8. Vérification via `hadolint/hadolint-action@v3.1.0` du `Dockerfile` utilisé pour la construction de notre image `nginc`
+    ```bash
+   make build-symfony
+   ```
+8. Vérification via `hadolint/hadolint-action@v3.1.0` du `Dockerfile` utilisé pour la construction de notre image `nginx`
+   
+    En local nous pouvons, reproduire le comportement de cette `Github Action` en lançant la commande suivante :
+    ```bash
+   docker run --rm -i  ghcr.io/hadolint/hadolint < nginx.prod.dockerfile
+    ```
 9. Utilisation du `makefile` pour le build de notre image `nginx`
+    ```bash
+   make build-nginx
+   ```
