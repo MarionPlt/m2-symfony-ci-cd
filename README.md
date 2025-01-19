@@ -35,8 +35,12 @@ Pour finir il y'a aussi notre `makefile` qui nous permet de lancer nos commandes
 ## Repository Rulesets
 
 Nous avons mis en place une règle sur le repository GitHub: \
-Forcer l'utilisation de _pull requests_ sur la branche 'main' avec approbation obligatoire d'un utilisateur 
-qui n'est pas celui ayant fait le commit et bloque le tag "--force" sur les pushs. 
+![img.png](doc/github_ruleset.png) \
+Règle active sur les branches `main` et `develop`, elle applique les principes suivants :
+- Un merge sur ces branches doit obligatoirement passer par des Pull Requests.
+- Les Pull Requests nécessitent l'approbation d'un utilisateur qui ne soit pas le dernier utilisateur à avoir push un commit sur cette branche.
+- Les Pull Requests nécessitent que l'action GitHub 'ci' soit valide avant de pouvoir merge même si approbation
+- Il est impossible de `push --force` sur ces branches
 
 ## CI
 
