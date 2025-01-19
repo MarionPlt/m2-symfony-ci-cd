@@ -1,5 +1,8 @@
 # m2-symfony-ci-cd
 
+![CI Job](https://github.com/BlueSkunka/m2-symfony-ci-cd/actions/workflows/ci.yml/badge.svg) \
+![CD Job](https://github.com/BlueSkunka/m2-symfony-ci-cd/actions/workflows/cd.yml/badge.svg)
+
 ## Team
 
 - Somveille Quentin (skunka)
