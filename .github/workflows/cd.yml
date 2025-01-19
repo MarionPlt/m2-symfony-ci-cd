@@ -5,6 +5,10 @@ on:
       - main
     tags:
       - "**"
+
+permissions:
+  contents: write
+
 jobs:
   cd:
     runs-on: ubuntu-22.04
@@ -37,3 +41,13 @@ jobs:
           file: nginx.prod.dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/m2-ci-cd-nginx:${{ env.IMAGE_TAG }}
+      - name: Create release notes on tag push
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+        run: |
+          gh release create "$tag" \
+              --repo="$GITHUB_REPOSITORY" \
+              --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
+              --generate-notes
