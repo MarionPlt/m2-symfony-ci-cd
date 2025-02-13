@@ -1,3 +1,5 @@
+test it
+
 # m2-symfony-ci-cd
 
 ![CI Job](https://github.com/BlueSkunka/m2-symfony-ci-cd/actions/workflows/ci.yml/badge.svg) \
