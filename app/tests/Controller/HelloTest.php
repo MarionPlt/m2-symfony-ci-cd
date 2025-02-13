@@ -12,6 +12,6 @@ class HelloTest extends WebTestCase
         $crawler = $client->request('GET', '/hello');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('body', '❤ Marion ❤ & ❤ Damien ❤ ️');
+        $this->assertSelectorTextContains('body', '❤ Mayon ❤ & ❤ Damien ❤ ️');
     }
 }
